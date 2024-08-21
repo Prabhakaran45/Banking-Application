@@ -46,6 +46,7 @@ public class CustomerHandler {
 
         );
         Bank.list.add(newCustomer);
+        Bank.map.put(newCustomer.accountId,newCustomer);
     }
     public String encrypt(String password){
         char[] arr=password.toCharArray();
@@ -60,6 +61,25 @@ public class CustomerHandler {
 
         }
         return st;
+    }
+    private boolean authendication(int accId,String password){
+        String encryPass=encrypt(password);
+        if(Bank.map.get(accId).passWord.equals(encryPass)) return true;
+        return false;
+
+    }
+    public void withdrawl(){
+        System.out.println("Enter the account id:");
+        int account=sc.nextInt();
+        System.out.println("Enter the Password:");
+        String password=sc.next();
+        if(authendication(account,password)){
+            System.out.println("Your Process is ready....");
+        }
+        else {
+            System.out.println("Your User Id or Password is wrong Please Try again");
+        }
+
     }
 
 }

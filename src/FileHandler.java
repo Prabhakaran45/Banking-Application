@@ -14,7 +14,9 @@ public class FileHandler {
         BufferedReader bf=new BufferedReader(new FileReader(fileName));
         String customerInfo=bf.readLine();
         while(customerInfo !=null) {
-            Bank.list.add(castStringToCustomer(customerInfo));
+            Customer customerDetails=castStringToCustomer(customerInfo);
+            Bank.list.add(customerDetails);
+            Bank.map.put(customerDetails.accountId,customerDetails);
             customerInfo = bf.readLine();
         }
         int size=Bank.list.size();
