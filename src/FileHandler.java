@@ -5,18 +5,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class FileHandler {
     private static final String fileName="src\\bank_db.txt";
+
     public void initializer() throws IOException {
-        File file=new File(fileName);
-        BufferedReader bf=new BufferedReader(new FileReader(file));
+        BufferedReader bf=new BufferedReader(new FileReader(fileName));
         String customerInfo=bf.readLine();
         while(customerInfo !=null) {
             Bank.list.add(castStringToCustomer(customerInfo));
             customerInfo = bf.readLine();
         }
+        int size=Bank.list.size();
+        Bank.refCustomerId=Bank.list.get(size-1).accountId;
+        Bank.refCustomerAccount=Bank.list.get(size-1).accountNumber;
        bf.close();
+
     }
     private Customer castStringToCustomer(String customerInfo){
         List<String> split= Arrays.asList(customerInfo.split(" "));
@@ -29,4 +34,5 @@ public class FileHandler {
         );
         return customer;
     }
+
 }
