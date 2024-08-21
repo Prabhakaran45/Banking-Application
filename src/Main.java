@@ -9,6 +9,7 @@ public class Main {
         Scanner sc=new Scanner(System.in);
         FileHandler handler=new FileHandler();
         CustomerHandler cHandle=new CustomerHandler();
+
         try {
             handler.initializer();
         }

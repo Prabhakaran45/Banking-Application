@@ -21,12 +21,13 @@ public class CustomerHandler {
             return;
 
         }
+        String encrypted_password= encrypt(passWord);
         int size=Bank.list.size();
         Bank.refCustomerAccount=Bank.list.get(size-1).accountId;
         Bank.refCustomerAccount=Bank.list.get(size-1).accountNumber;
         Bank.refCustomerAccount++;
         Bank.refCustomerId++;
-        String str="\n"+Bank.refCustomerId+" "+Bank.refCustomerAccount+" "+name+" "+balance+" "+passWord;
+        String str="\n"+Bank.refCustomerId+" "+Bank.refCustomerAccount+" "+name+" "+balance+" "+encrypted_password;
 
         try {
             BufferedWriter br=new BufferedWriter(new FileWriter("src\\bank_db.txt",true));
@@ -35,14 +36,30 @@ public class CustomerHandler {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         Customer newCustomer=new Customer(
                       Bank.refCustomerId,
                       Bank.refCustomerAccount,
                       name,
                      balance,
-                    passWord
+                encrypted_password
+
         );
         Bank.list.add(newCustomer);
+    }
+    public String encrypt(String password){
+        char[] arr=password.toCharArray();
+        String st="";
+        for(char ch:arr){
+            if(ch=='9') st+="0";
+            else if(ch=='z') st+="a";
+            else if(ch=='Z') st+="A";
+            else{
+                st+=(char)(ch+1);
+            }
+
+        }
+        return st;
     }
 
 }
