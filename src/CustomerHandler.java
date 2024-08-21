@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -62,7 +60,7 @@ public class CustomerHandler {
         }
         return st;
     }
-    private boolean authendication(int accId,String password){
+    private boolean authentication(int accId, String password){
         String encryPass=encrypt(password);
         if(Bank.map.get(accId).passWord.equals(encryPass)) return true;
         return false;
@@ -73,7 +71,7 @@ public class CustomerHandler {
         int account=sc.nextInt();
         System.out.println("Enter the Password:");
         String password=sc.next();
-        if(authendication(account,password)){
+        if(authentication(account,password)){
             System.out.println("Your Process is ready....");
         }
         else {
