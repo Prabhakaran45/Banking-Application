@@ -17,19 +17,26 @@ public class Main {
         catch(IOException e){
             e.printStackTrace();
         }
-        menu();
+        int n=4;
+        while(menu()) ;
 
 
 
     }
-    public static void menu(){
+    public static boolean menu(){
         System.out.println("Please Enter your option \n1.Add Customer\n2.WithDraw Money\n3.Deposit\n4.FundTransfer\n5.Exit");
         int choice=sc.nextInt();
-        CustomerHandler cHandle=new CustomerHandler();
-        switch (choice){
-            case 1 -> cHandle.create();
-            case 2 -> cHandle.withdrawl();
+        CustomerHandler CustomerHandle=new CustomerHandler();
 
+        switch (choice){
+            case 1 -> CustomerHandle.create();
+            case 2 -> CustomerHandle.withdrawl();
+            case 3 ->CustomerHandle.deposit();
+            case 4 ->CustomerHandle.transfer();
+            case 5 -> {
+                return false;
+            }
         }
+        return true;
     }
 }

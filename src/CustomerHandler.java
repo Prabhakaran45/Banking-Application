@@ -72,12 +72,69 @@ public class CustomerHandler {
         System.out.println("Enter the Password:");
         String password=sc.next();
         if(authentication(account,password)){
-            System.out.println("Your Process is ready....");
+            System.out.println("Enter the amount to Withdraw:");
+            int money=sc.nextInt();
+            Customer customer=Bank.map.get(account);
+            if(customer.balance<money) {
+                System.out.println("Insufficient Balance");
+                System.out.println("Your Balance is "+customer.balance);
+            }
+            else if(customer.balance-money<1000) {
+                System.out.println("Need to maintain Minimum Balance");
+                System.out.println("Your balance is "+customer.balance);
+            }
+
+            else{
+                customer.balance-=money;
+                System.out.println("You can collect your money");
+                System.out.println("Remaining Balance:"+customer.balance);
+            }
+
+
         }
         else {
             System.out.println("Your User Id or Password is wrong Please Try again");
         }
 
+    }
+    public void deposit(){
+        System.out.println("Enter the account id:");
+        int account=sc.nextInt();
+        System.out.println("Enter the Password:");
+        String password=sc.next();
+        if (authentication(account,password)){
+            System.out.println("enter the amount to deposit");
+            int amount=sc.nextInt();
+            Customer customer=Bank.map.get(account);
+            customer.balance+=amount;
+            System.out.println("Your Available Balance is :"+ customer.balance);
+        }
+
+    }
+    public boolean transfer(){
+        System.out.println("Enter your id");
+        int account=sc.nextInt();
+        System.out.println("Enter your Password:");
+        String password=sc.next();
+        if (authentication(account,password)){
+            System.out.println("Enter the other persons id:");
+            int acc2=sc.nextInt();
+            Customer customer=Bank.map.get(account);
+            System.out.println("Enter the amount:");
+            int amount=sc.nextInt();
+
+            Customer customer2=Bank.map.get(acc2);
+            if(amount > customer.balance || customer.balance-amount<1000) return false;
+            customer.balance-=amount;
+            customer2.balance+=amount;
+            System.out.println("Your Balance "+customer.balance);
+            System.out.println("Your  friends Balance "+customer2.balance);
+        }
+        else {
+            return false;
+        }
+
+     return true;
     }
 
 }
