@@ -7,20 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileHandler {
-    List<Customer> list=new ArrayList<>();
     private static final String fileName="src\\bank_db.txt";
     public void initializer() throws IOException {
         File file=new File(fileName);
         BufferedReader bf=new BufferedReader(new FileReader(file));
         String customerInfo=bf.readLine();
-        int position=0;
-
-        do {
-            list.add(castStringToCustomer(customerInfo));
-            customerInfo= bf.readLine();
+        while(customerInfo !=null) {
+            Bank.list.add(castStringToCustomer(customerInfo));
+            customerInfo = bf.readLine();
         }
-        while(customerInfo !=null);
-        Bank.list=list;
+       bf.close();
     }
     private Customer castStringToCustomer(String customerInfo){
         List<String> split= Arrays.asList(customerInfo.split(" "));

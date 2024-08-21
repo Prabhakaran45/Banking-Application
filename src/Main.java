@@ -12,6 +12,6 @@ public class Main {
         catch(IOException e){
             e.printStackTrace();
         }
-        System.out.println(Bank.list.get(0).Name);
+        System.out.println(Bank.list.get(2).passWord);
     }
 }
